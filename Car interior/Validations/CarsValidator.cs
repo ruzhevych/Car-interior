@@ -1,9 +1,9 @@
 ﻿﻿using FluentValidation;
-using Car_interior.Entities;
+using Car_interior.Dtos;
 
 namespace Car_interior.Validations
 {
-    public class CarsValidator : AbstractValidator<Cars>
+    public class CarsValidator : AbstractValidator<CarsDto>
     {
         public CarsValidator()
         {

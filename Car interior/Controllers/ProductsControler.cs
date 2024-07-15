@@ -1,17 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Car_interior.Data;
 using Car_interior.Models;
+using Car_interior.Validations;
 using Car_interior.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Car_interior.Dtos;
 
 namespace Car_interior.Controllers
 {
     public class ProductsController : Controller
     {
         private InteriorDbContext ctx = new InteriorDbContext();
-        public ProductsController()
-        { 
+        private readonly IMapper mapper;
+
+        public ProductsController(IMapper mapper)
+        {
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -22,7 +28,7 @@ namespace Car_interior.Controllers
                 .Where(x => !x.Archived)
                 .ToList();
 
-            return View(cars);
+            return View(mapper.Map<List<CarsDto>>(cars));
         }
 
         // GET: 
@@ -36,7 +42,7 @@ namespace Car_interior.Controllers
 
         // POST
         [HttpPost]
-        public IActionResult Create(Cars model)
+        public IActionResult Create(CarsDto model)
         {
             //// data validation
             if (!ModelState.IsValid)
@@ -46,7 +52,22 @@ namespace Car_interior.Controllers
                 return View("Upsert", model);
             }
 
-            ctx.Cars.Add(model);
+            // 1 - manual mapping
+            //var entity = new Product
+            //{
+            //    Name = model.Name,
+            //    Archived = model.Archived,
+            //    CategoryId = model.CategoryId,
+            //    Description = model.Description,
+            //    Discount = model.Discount,
+            //    ImageUrl = model.ImageUrl,
+            //    Price = model.Price,
+            //    Quantity = model.Quantity
+            //};
+            // 2 - using Auto Mapper
+            var entity = mapper.Map<Cars>(model);
+
+            ctx.Cars.Add(entity);
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -61,11 +82,11 @@ namespace Car_interior.Controllers
 
             LoadCategories();
             ViewBag.CreateMode = false;
-            return View("Upsert", cars);
+            return View("Upsert", mapper.Map<List<CarsDto>>(cars));
         }
 
         [HttpPost]
-        public IActionResult Edit(Cars model)
+        public IActionResult Edit(CarsDto model)
         {
            // data validation
             if (!ModelState.IsValid)
@@ -75,7 +96,7 @@ namespace Car_interior.Controllers
                 return View("Upsert", model);
             }
 
-            ctx.Cars.Update(model);
+            ctx.Cars.Update(mapper.Map<Cars>(model));
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -101,7 +122,7 @@ namespace Car_interior.Controllers
                 .Where(x => x.Archived)
                 .ToList();
 
-            return View(cars);
+            return View(mapper.Map<List<CarsDto>>(cars));
         }
 
         public IActionResult ArchiveItem(int id)

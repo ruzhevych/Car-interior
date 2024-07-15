@@ -1,4 +1,4 @@
-﻿@model List<Cars>
+﻿@model List<CarsDto>
 
 <h1>Cars List</h1>
 <p>You can manage products here.</p>
@@ -36,7 +36,7 @@
                 <td>
                         <span>@i.Price$</span>
                 </td>
-                <td>@i.Category?.Name</td>
+                <td>@i.CategoryName</td>
                 <td>
                     @if (i.Quantity > 0)
                     {
