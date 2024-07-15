@@ -38,7 +38,13 @@ namespace Car_interior.Controllers
         [HttpPost]
         public IActionResult Create(Cars model)
         {
-            // TODO: add data validation
+            //// data validation
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = true;
+                LoadCategories();
+                return View("Upsert", model);
+            }
 
             ctx.Cars.Add(model);
             ctx.SaveChanges();
@@ -61,7 +67,13 @@ namespace Car_interior.Controllers
         [HttpPost]
         public IActionResult Edit(Cars model)
         {
-            // TODO: add data validation
+           // data validation
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = false;
+                LoadCategories();
+                return View("Upsert", model);
+            }
 
             ctx.Cars.Update(model);
             ctx.SaveChanges();

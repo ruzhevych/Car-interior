@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.admin-product-table img {
+    transition: .2s
+}
+
+
+
+
+    .admin-product-table img:hover {
+        transform: scale(3)
+    }
+
+
+
+
+.home-product-list .card img {
+    object-fit: contain;
+    margin-top: 4px;
+}

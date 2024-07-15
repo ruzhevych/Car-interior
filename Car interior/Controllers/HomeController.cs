@@ -1,18 +1,24 @@
 using Car_interior.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Car_interior.Data;
 
 namespace Car_interior.Controllers
 {
     public class HomeController : Controller
     {
+        private InteriorDbContext context = new();
         public HomeController()
         {
         }
 
         public IActionResult Index()
         {
-            return View();
+           var cars = context.Cars
+                .Include(x => x.Category)
+                .ToList();
+            return View(cars);
         }
 
         public IActionResult Privacy()
