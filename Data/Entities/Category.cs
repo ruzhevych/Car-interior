@@ -1,4 +1,4 @@
-﻿namespace Car_interior.Entities
+﻿namespace Data.Entities
 {
     public class Category
     {

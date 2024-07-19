@@ -1,12 +1,12 @@
 ﻿﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Car_interior.Data;
+using Data.Data;
 using Car_interior.Models;
-using Car_interior.Validations;
-using Car_interior.Entities;
+using Core.Validations;
+using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Car_interior.Dtos;
+using Core.Dtos;
 
 namespace Car_interior.Controllers
 {

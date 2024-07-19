@@ -1,7 +1,7 @@
-﻿using Car_interior.Entities;
+﻿using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Car_interior.Data
+namespace Data.Data
 {
     public class InteriorDbContext : DbContext
     {

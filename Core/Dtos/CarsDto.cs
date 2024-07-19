@@ -1,6 +1,4 @@
-﻿using Car_interior.Entities;
-
-namespace Car_interior.Dtos
+﻿namespace Core.Dtos
 {
     public class CarsDto
     {

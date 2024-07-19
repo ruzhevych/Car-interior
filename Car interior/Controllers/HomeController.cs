@@ -2,7 +2,7 @@ using Car_interior.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Car_interior.Data;
+using Data.Data;
 
 namespace Car_interior.Controllers
 {

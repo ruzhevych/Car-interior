@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Car_interior.Entities
+﻿namespace Data.Entities
 {
     public class Cars
     {
         public int Id { get; set; }
 
         //[Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         //[Url]
         public string? ImageUrl { get; set; }
